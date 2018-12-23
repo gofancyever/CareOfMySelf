@@ -1,0 +1,6 @@
+framework module Pods_CareOfMySelfUITests {
+  umbrella header "Pods-CareOfMySelfUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
