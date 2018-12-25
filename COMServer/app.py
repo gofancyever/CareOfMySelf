@@ -1,5 +1,10 @@
-from flask import Flask, render_template, session, request
-from flask_socketio import SocketIO, emit,send
+from flask import Flask, request
+from flask_socketio import SocketIO, emit
+from  flask_sqlalchemy import SQLAlchemy
+import os
+from model import OnlieDevice
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 
 # 发送操作指令事件
 SEND_LAUNCH_CMD = 'SEND_LAUNCH_CMD'
@@ -17,6 +22,7 @@ app = Flask(__name__, template_folder='./')
 app.config['SECRET_KEY'] = 'secret!'
 
 socketio = SocketIO(app)
+db = SQLAlchemy(app)
 
 def ack():
     print('message was received!')
@@ -64,10 +70,22 @@ def client_msg(msg):
     emit('device_server', {'data': msg['data']},callback=ack)
 
 
-@socketio.on('connect_event')
-def connected_msg(msg):
-    print(msg)
-    emit('server_response', {'data': msg['data']})
+@socketio.on('connect')
+def connect():
+    device = request.args['device']
+    sid = request.sid
+    device_model = OnlieDevice(sid=sid,device=device)
+    db.session.add(device_model)
+    db.session.commit()
+    print(sid)
+@socketio.on('disconnect')
+def disconnect():
+    sid = request.sid
+    device_model = OnlieDevice.query.filter_by(sid = sid).first()
+    db.session.delete(device_model)
+    db.session.commit()
+    print('Client disconnected')
+
 
 @socketio.on_error()
 def error_handler(e):

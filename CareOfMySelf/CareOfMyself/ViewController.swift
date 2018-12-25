@@ -12,9 +12,10 @@ import Alamofire
 import Moya
 class ViewController: UIViewController {
     
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var sendTF: UITextField!
     
-    let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, config: [.log(true), .compress, .connectParams(["device":"iOS"])])
     
     var socket:SocketIOClient!
     
@@ -23,10 +24,12 @@ class ViewController: UIViewController {
         socket = manager.defaultSocket
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")
+            self.statusView.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
             
         }
         socket.on(clientEvent: .error) { (data, ack) in
             print("error")
+            self.statusView.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         }
         
         
@@ -42,7 +45,6 @@ class ViewController: UIViewController {
             }
             ack.with("Got your currentAmount", "dude")
         }
-        
         socket.connect()
 
     }

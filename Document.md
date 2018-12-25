@@ -80,3 +80,14 @@ URL: switch_mon
 ####method:GET
 
 ####param: {"data":Bool}
+
+-----------
+
+===================
+URL: switch_water
+===========
+切换开启浇水
+
+####method:GET
+
+####param: {"data":Bool}

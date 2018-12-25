@@ -13,6 +13,7 @@ let provider = MoyaProvider<COMApi>()
 enum COMApi {
     case switchVideo(open:Bool)
     case switchMon(open:Bool)
+    case switchWater(open:Bool)
     
 }
 
@@ -27,6 +28,8 @@ extension COMApi:TargetType {
             return "/switch_video"
         case .switchMon(open: _):
             return "/switch_mon"
+        case .switchWater(open: _):
+            return "/switch_water"
         }
     }
     
@@ -35,6 +38,8 @@ extension COMApi:TargetType {
         case let .switchVideo(open: open):
             return ["data":open]
         case let .switchMon(open: open):
+            return ["data":open]
+        case let .switchWater(open: open):
             return ["data":open]
         }
     }
