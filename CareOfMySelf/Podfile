@@ -10,7 +10,7 @@ target 'CareOfMySelf' do
     pod 'Alamofire'
     pod 'Moya'
     pod 'SwiftyJSON'
-#    pod 'SVProgressHUD'
+    pod 'SVProgressHUD'
   target 'CareOfMySelfTests' do
     inherit! :search_paths
     # Pods for testing

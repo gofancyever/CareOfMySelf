@@ -8,18 +8,18 @@
 import Moya
 import Result
 import SwiftyJSON
-let provider = MoyaProvider<COMApi>()
+let provider = MoyaProvider<COMApi>(plugins:[Plugin()])
 
 enum COMApi {
     case switchVideo(open:Bool)
     case switchMon(open:Bool)
     case switchWater(open:Bool)
-    
+    case devices
 }
 
 extension COMApi:TargetType {
     var baseURL: URL {
-        return URL(string: "129.0.0.1:5000")!
+        return URL(string: "http://192.168.0.21:5000")!
     }
     
     var path: String {
@@ -30,6 +30,8 @@ extension COMApi:TargetType {
             return "/switch_mon"
         case .switchWater(open: _):
             return "/switch_water"
+        case .devices:
+            return "/get_devices"
         }
     }
     
@@ -41,6 +43,8 @@ extension COMApi:TargetType {
             return ["data":open]
         case let .switchWater(open: open):
             return ["data":open]
+        case .devices:
+            return nil
         }
     }
     

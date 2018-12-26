@@ -9,12 +9,14 @@ PODS:
   - Socket.IO-Client-Swift (13.4.0):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.6)
+  - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
   - Alamofire
   - Moya
   - Socket.IO-Client-Swift
+  - SVProgressHUD
   - SwiftyJSON
 
 SPEC REPOS:
@@ -24,6 +26,7 @@ SPEC REPOS:
     - Result
     - Socket.IO-Client-Swift
     - Starscream
+    - SVProgressHUD
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -32,8 +35,9 @@ SPEC CHECKSUMS:
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   Socket.IO-Client-Swift: 2b2720f14c92ff1237ced09bc2f2da2022624fee
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 00e20d95d2508a62adfa762a87a0f86a04c8008a
+PODFILE CHECKSUM: f7ef632f19965cdedcd1cbf333cc2dc5031e8545
 
 COCOAPODS: 1.5.3
